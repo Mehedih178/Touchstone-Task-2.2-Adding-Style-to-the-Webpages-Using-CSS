@@ -136,7 +136,7 @@
             <p>Sign up for our newsletter</p>
             <form action="#" method="post">
                 <input type="email" placeholder="Your email address" aria-label="Email address">
-                <button type="submit">Subscribe</button>
+                <button type="submit" id="subscribe-btn">Subscribe</button>
             </form>
         </div>
 
@@ -155,6 +155,14 @@
     </div>
 
 </footer>
+
+<script>
+    // Subscribe button — footer (all pages)
+    document.getElementById('subscribe-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        alert('Thank you for subscribing.');
+    });
+</script>
 
 </body>
 </html>

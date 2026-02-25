@@ -5,6 +5,243 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Haven Bookstore - Gallery</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* =====================
+           GALLERY PAGE STYLES
+           ===================== */
+
+        .gallery-hero {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto 10px;
+            text-align: center;
+        }
+
+        .gallery-hero h2 {
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            color: var(--primary-brown);
+            margin-bottom: 8px;
+        }
+
+        .gallery-hero p {
+            color: #777;
+            font-size: 1rem;
+            max-width: 540px;
+            margin: 0 auto;
+        }
+
+        /* Category filter tabs */
+        .gallery-filters {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 28px auto 36px;
+        }
+
+        .filter-btn {
+            background: transparent;
+            color: var(--primary-brown);
+            border: 2px solid var(--accent-gold);
+            padding: 8px 22px;
+            font-size: 0.85rem;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, transform 0.15s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--accent-gold);
+            color: var(--primary-brown);
+            transform: translateY(-1px);
+        }
+
+        /* Section headings */
+        .gallery-section {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto 50px;
+        }
+
+        .gallery-section-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.15rem;
+            color: var(--primary-brown);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-gold);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .gallery-section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(200,169,106,0.3);
+        }
+
+        /* Product grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        /* Product card */
+        .product-card {
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 14px rgba(74,44,42,0.09);
+            transition: transform 0.22s, box-shadow 0.22s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 32px rgba(74,44,42,0.16);
+        }
+
+        /* Image wrapper with overlay */
+        .product-img-wrap {
+            position: relative;
+            overflow: hidden;
+            background: #f0ebe0;
+        }
+
+        .product-img-wrap img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.35s ease;
+        }
+
+        .product-card:hover .product-img-wrap img {
+            transform: scale(1.04);
+        }
+
+        /* Quick-add overlay on hover */
+        .product-img-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(74,44,42,0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.25s;
+        }
+
+        .product-card:hover .product-img-overlay {
+            opacity: 1;
+        }
+
+        .overlay-btn {
+            background: var(--accent-gold);
+            color: var(--primary-brown);
+            border: none;
+            padding: 10px 22px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            border-radius: 4px;
+            cursor: pointer;
+            transform: translateY(6px);
+            transition: transform 0.25s, background 0.2s;
+        }
+
+        .product-card:hover .overlay-btn {
+            transform: translateY(0);
+        }
+
+        .overlay-btn:hover {
+            background: var(--white);
+        }
+
+        /* Card body */
+        .product-info {
+            padding: 18px 20px 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .product-info strong {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1rem;
+            color: var(--primary-brown);
+            line-height: 1.3;
+        }
+
+        .product-info button {
+            margin-top: auto;
+            width: 100%;
+            padding: 10px;
+            font-size: 0.85rem;
+        }
+
+        /* Cart action buttons row */
+        .cart-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: flex-end;
+            margin-top: 8px;
+        }
+
+        .cart-actions #clear-cart-btn {
+            background-color: transparent;
+            color: var(--primary-brown);
+            border: 2px solid var(--primary-brown);
+        }
+
+        .cart-actions #clear-cart-btn:hover {
+            background-color: var(--primary-brown);
+            color: white;
+        }
+
+        .cart-actions #process-order-btn {
+            background-color: var(--accent-gold);
+            color: var(--primary-brown);
+            border: 2px solid var(--accent-gold);
+            font-weight: 700;
+        }
+
+        .cart-actions #process-order-btn:hover {
+            background-color: var(--primary-brown);
+            color: white;
+            border-color: var(--primary-brown);
+        }
+
+        /* =====================
+           RESPONSIVE
+           ===================== */
+        @media (max-width: 900px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 520px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-img-wrap img {
+                height: 200px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -59,7 +296,7 @@
             </div>
             <div class="product-info">
                 <strong>Rise &amp; Wine</strong>
-                <button>Add to Cart</button>
+                <button class="add-to-cart-btn">Add to Cart</button>
             </div>
         </div>
 
@@ -67,12 +304,12 @@
             <div class="product-img-wrap">
                 <img src="images/book2.jpg" alt="Glory Riders">
                 <div class="product-img-overlay">
-                    <button class="overlay-btn">Quick Add</button>
+                    <button class="overlay-btn add-to-cart-btn">Quick Add</button>
                 </div>
             </div>
             <div class="product-info">
                 <strong>Glory Riders</strong>
-                <button>Add to Cart</button>
+                <button class="add-to-cart-btn">Add to Cart</button>
             </div>
         </div>
 
@@ -80,12 +317,12 @@
             <div class="product-img-wrap">
                 <img src="images/book3.jpg" alt="Secrets of Shadowed Chronicles">
                 <div class="product-img-overlay">
-                    <button class="overlay-btn">Quick Add</button>
+                    <button class="overlay-btn add-to-cart-btn">Quick Add</button>
                 </div>
             </div>
             <div class="product-info">
                 <strong>Secrets of Shadowed Chronicles</strong>
-                <button>Add to Cart</button>
+                <button class="add-to-cart-btn">Add to Cart</button>
             </div>
         </div>
 
@@ -106,7 +343,7 @@
             </div>
             <div class="product-info">
                 <strong>Pickleball Monthly</strong>
-                <button>Add to Cart</button>
+                <button class="add-to-cart-btn">Add to Cart</button>
             </div>
         </div>
 
@@ -114,12 +351,12 @@
             <div class="product-img-wrap">
                 <img src="images/mag2.jpg" alt="Traveler's Journal">
                 <div class="product-img-overlay">
-                    <button class="overlay-btn">Quick Add</button>
+                    <button class="overlay-btn add-to-cart-btn">Quick Add</button>
                 </div>
             </div>
             <div class="product-info">
                 <strong>Traveler's Journal</strong>
-                <button>Add to Cart</button>
+                <button class="add-to-cart-btn">Add to Cart</button>
             </div>
         </div>
 
@@ -127,12 +364,12 @@
             <div class="product-img-wrap">
                 <img src="images/mag3.jpg" alt="Foodie Magazine">
                 <div class="product-img-overlay">
-                    <button class="overlay-btn">Quick Add</button>
+                    <button class="overlay-btn add-to-cart-btn">Quick Add</button>
                 </div>
             </div>
             <div class="product-info">
                 <strong>Foodie Magazine</strong>
-                <button>Add to Cart</button>
+                <button class="add-to-cart-btn">Add to Cart</button>
             </div>
         </div>
 
@@ -148,12 +385,12 @@
             <div class="product-img-wrap">
                 <img src="images/item1.jpg" alt="Canvas Tote Bag">
                 <div class="product-img-overlay">
-                    <button class="overlay-btn">Quick Add</button>
+                    <button class="overlay-btn add-to-cart-btn">Quick Add</button>
                 </div>
             </div>
             <div class="product-info">
                 <strong>Canvas Tote Bag</strong>
-                <button>Add to Cart</button>
+                <button class="add-to-cart-btn">Add to Cart</button>
             </div>
         </div>
 
@@ -161,12 +398,12 @@
             <div class="product-img-wrap">
                 <img src="images/item2.jpg" alt="Classic Notebook">
                 <div class="product-img-overlay">
-                    <button class="overlay-btn">Quick Add</button>
+                    <button class="overlay-btn add-to-cart-btn">Quick Add</button>
                 </div>
             </div>
             <div class="product-info">
                 <strong>Classic Notebook</strong>
-                <button>Add to Cart</button>
+                <button class="add-to-cart-btn">Add to Cart</button>
             </div>
         </div>
 
@@ -174,15 +411,23 @@
             <div class="product-img-wrap">
                 <img src="images/item3.jpg" alt="Sticker Collection">
                 <div class="product-img-overlay">
-                    <button class="overlay-btn">Quick Add</button>
+                    <button class="overlay-btn add-to-cart-btn">Quick Add</button>
                 </div>
             </div>
             <div class="product-info">
                 <strong>Sticker Collection</strong>
-                <button>Add to Cart</button>
+                <button class="add-to-cart-btn">Add to Cart</button>
             </div>
         </div>
 
+    </div>
+</section>
+
+<!-- CART ACTIONS -->
+<section class="gallery-section">
+    <div class="cart-actions">
+        <button id="clear-cart-btn">Clear Cart</button>
+        <button id="process-order-btn">Process Order</button>
     </div>
 </section>
 
@@ -219,7 +464,7 @@
             <p>Sign up for our newsletter</p>
             <form action="#" method="post">
                 <input type="email" placeholder="Your email address" aria-label="Email address">
-                <button type="submit">Subscribe</button>
+                <button type="submit" id="subscribe-btn">Subscribe</button>
             </form>
         </div>
 
@@ -239,6 +484,29 @@
 </footer>
 
 <script>
+    // Subscribe button — footer
+    document.getElementById('subscribe-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        alert('Thank you for subscribing.');
+    });
+
+    // Add to Cart buttons (all product cards + quick-add overlays)
+    document.querySelectorAll('.add-to-cart-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            alert('Item added to the cart.');
+        });
+    });
+
+    // Clear Cart button
+    document.getElementById('clear-cart-btn').addEventListener('click', function() {
+        alert('Cart cleared.');
+    });
+
+    // Process Order button
+    document.getElementById('process-order-btn').addEventListener('click', function() {
+        alert('Thank you for your order.');
+    });
+
     // Filter tab active state
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.addEventListener('click', function() {

@@ -5,7 +5,221 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Haven Bookstore - Contact</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* =====================
+           CONTACT PAGE STYLES
+           ===================== */
 
+        .contact-hero {
+            width: 90%;
+            max-width: 1100px;
+            margin: 48px auto 0;
+            text-align: center;
+        }
+
+        .contact-hero h2 {
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            color: var(--primary-brown);
+            margin-bottom: 10px;
+        }
+
+        .contact-hero p {
+            color: #777;
+            font-size: 1rem;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        /* Two-column layout: form + info panel */
+        .contact-wrapper {
+            width: 90%;
+            max-width: 1000px;
+            margin: 44px auto 60px;
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 40px;
+            align-items: start;
+        }
+
+        /* ---- FORM PANEL ---- */
+        .contact-form-panel {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 40px 40px 36px;
+            box-shadow: 0 4px 22px rgba(74,44,42,0.09);
+        }
+
+        .contact-form-panel h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.25rem;
+            color: var(--primary-brown);
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            color: var(--primary-brown);
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 11px 14px;
+            border: 1.5px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Lato', Georgia, sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            background: #fdfaf5;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            margin: 0;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 3px rgba(200,169,106,0.18);
+            background: var(--white);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 13px;
+            font-size: 0.9rem;
+            letter-spacing: 0.08em;
+            margin-top: 4px;
+        }
+
+        /* ---- INFO PANEL ---- */
+        .contact-info-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-card {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 26px 28px;
+            box-shadow: 0 4px 22px rgba(74,44,42,0.09);
+        }
+
+        .info-card h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.05rem;
+            color: var(--primary-brown);
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px;
+            font-size: 0.92rem;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-icon {
+            font-size: 1.1rem;
+            margin-top: 1px;
+            flex-shrink: 0;
+            color: var(--accent-gold);
+        }
+
+        .info-item strong {
+            display: block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--primary-brown);
+            margin-bottom: 2px;
+            font-weight: 700;
+        }
+
+        /* Hours table inside info card */
+        .hours-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            color: #555;
+        }
+
+        .hours-table tr td {
+            padding: 5px 0;
+            background: transparent;
+            border: none;
+            text-align: left;
+        }
+
+        .hours-table tr td:last-child {
+            text-align: right;
+            color: var(--soft-green);
+            font-weight: 700;
+        }
+
+        .hours-table tr:not(:last-child) td {
+            border-bottom: 1px solid rgba(200,169,106,0.15);
+        }
+
+        /* =====================
+           RESPONSIVE
+           ===================== */
+        @media (max-width: 860px) {
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info-panel {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .contact-form-panel {
+                padding: 28px 22px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info-panel {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -67,7 +281,7 @@
                 <textarea id="message" name="message" placeholder="Tell us what you're looking for..." required></textarea>
             </div>
 
-            <input type="submit" value="Send Message" class="form-submit">
+            <input type="submit" value="Send Message" id="contact-submit-btn" class="form-submit">
 
         </form>
     </div>
@@ -98,7 +312,7 @@
                 <span class="info-icon">✉️</span>
                 <div>
                     <strong>Email</strong>
-                    hello@bookhaven.com
+                    <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5b333e3737341b39343430333a2d3e3575383436">[email&#160;protected]</a>
                 </div>
             </div>
         </div>
@@ -106,9 +320,9 @@
         <div class="info-card">
             <h3>Store Hours</h3>
             <table class="hours-table">
-                <p>Monday - Friday: 9 a.m. to 8 p.m.</p>
-                <p>Saturday: 10 a.m. to 6 p.m.</p>
-                <p>Sunday: 11 a.m. to 5 p.m.</p>
+                <p>Monday - Friday 9am – 8pm</p>
+                <p>Saturday 10am – 7pm</p>
+                <p>Sunday 11am – 5pm</p>
             </table>
         </div>
 
@@ -149,7 +363,7 @@
             <p>Sign up for our newsletter</p>
             <form action="#" method="post">
                 <input type="email" placeholder="Your email address" aria-label="Email address">
-                <button type="submit">Subscribe</button>
+                <button type="submit" id="subscribe-btn">Subscribe</button>
             </form>
         </div>
 
@@ -167,6 +381,25 @@
     </div>
 
 </footer>
+
+<script>
+    // Subscribe button — footer
+    document.getElementById('subscribe-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        alert('Thank you for subscribing.');
+    });
+
+    // Contact form submit button
+    document.getElementById('contact-submit-btn').addEventListener('click', function(e) {
+        // Let browser run HTML5 required-field validation first;
+        // only show alert if the form is valid
+        var form = this.closest('form');
+        if (form.checkValidity()) {
+            e.preventDefault();
+            alert('Thank you for your message.');
+        }
+    });
+</script>
 
 </body>
 </html>

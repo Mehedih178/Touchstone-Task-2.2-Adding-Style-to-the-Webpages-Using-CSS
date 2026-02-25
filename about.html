@@ -5,6 +5,323 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Haven Bookstore - About Us</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* =====================
+           ABOUT PAGE STYLES
+           ===================== */
+
+        .page-hero {
+            width: 90%;
+            max-width: 1100px;
+            margin: 48px auto 0;
+            text-align: center;
+        }
+
+        .page-hero h2 {
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            color: var(--primary-brown);
+            margin-bottom: 10px;
+        }
+
+        .page-hero p {
+            color: #777;
+            font-size: 1rem;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        /* ---- ABOUT SECTION ---- */
+        .about-section {
+            width: 90%;
+            max-width: 1100px;
+            margin: 44px auto 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .about-section img {
+            width: 100%;
+            height: 360px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 6px 28px rgba(74,44,42,0.14);
+        }
+
+        .about-text h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.5rem;
+            color: var(--primary-brown);
+            margin-bottom: 16px;
+        }
+
+        .about-text p {
+            color: #555;
+            font-size: 0.97rem;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .about-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Decorative quote mark */
+        .about-text::before {
+            content: '\201C';
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 5rem;
+            color: var(--accent-gold);
+            opacity: 0.3;
+            line-height: 0.6;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* ---- VISIT US SECTION ---- */
+        .visit-section {
+            width: 90%;
+            max-width: 1100px;
+            margin: 56px auto 0;
+        }
+
+        .visit-section > h2 {
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            color: var(--primary-brown);
+            margin-bottom: 28px;
+            text-align: center;
+        }
+
+        .visit-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 36px;
+            align-items: stretch;
+        }
+
+        /* Map */
+        .map-wrap {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 22px rgba(74,44,42,0.12);
+            min-height: 360px;
+        }
+
+        .map-wrap iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 360px;
+            border: none;
+            display: block;
+        }
+
+        /* Info card */
+        .visit-info {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 36px 36px 32px;
+            box-shadow: 0 4px 22px rgba(74,44,42,0.09);
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .visit-info h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.25rem;
+            color: var(--primary-brown);
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--accent-gold);
+            margin: 0;
+        }
+
+        .visit-info-block {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .visit-info-block h4 {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-gold);
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .visit-detail {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.94rem;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .visit-icon {
+            color: var(--accent-gold);
+            font-size: 1rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Hours rows */
+        .hours-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.92rem;
+            color: #555;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(200,169,106,0.18);
+        }
+
+        .hours-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .hours-row span:last-child {
+            color: var(--soft-green);
+            font-weight: 700;
+            font-size: 0.88rem;
+        }
+
+        .directions-btn {
+            display: inline-block;
+            text-align: center;
+            margin-top: 4px;
+        }
+
+        .directions-btn a {
+            display: inline-block;
+            background: var(--soft-green);
+            color: var(--white);
+            padding: 11px 24px;
+            border-radius: 4px;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.15s;
+        }
+
+        .directions-btn a:hover {
+            background: var(--primary-brown);
+            transform: translateY(-1px);
+        }
+
+        /* ---- TESTIMONIALS ---- */
+        .testimonials-section {
+            width: 90%;
+            max-width: 1100px;
+            margin: 56px auto 0;
+        }
+
+        .testimonials-section h2 {
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            color: var(--primary-brown);
+            margin-bottom: 28px;
+            text-align: center;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 28px 26px;
+            box-shadow: 0 3px 16px rgba(74,44,42,0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            position: relative;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 28px rgba(74,44,42,0.14);
+        }
+
+        .testimonial-card::before {
+            content: '\201C';
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 3.5rem;
+            color: var(--accent-gold);
+            opacity: 0.25;
+            line-height: 1;
+            position: absolute;
+            top: 14px;
+            left: 20px;
+        }
+
+        .stars {
+            font-size: 1rem;
+            letter-spacing: 2px;
+            color: var(--accent-gold);
+        }
+
+        .testimonial-quote {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 0.98rem;
+            color: var(--text-dark);
+            line-height: 1.65;
+            padding-top: 10px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--primary-brown);
+            margin-top: auto;
+        }
+
+        /* =====================
+           RESPONSIVE
+           ===================== */
+        @media (max-width: 860px) {
+            .about-section,
+            .visit-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .about-section img {
+                height: 260px;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 540px) {
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .visit-info {
+                padding: 24px 20px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -183,7 +500,7 @@
             <p>Sign up for our newsletter</p>
             <form action="#" method="post">
                 <input type="email" placeholder="Your email address" aria-label="Email address">
-                <button type="submit">Subscribe</button>
+                <button type="submit" id="subscribe-btn">Subscribe</button>
             </form>
         </div>
 
@@ -201,6 +518,13 @@
     </div>
 
 </footer>
+<script>
+    // Subscribe button — footer
+    document.getElementById('subscribe-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        alert('Thank you for subscribing.');
+    });
+</script>
 
 </body>
 </html>
